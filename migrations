@@ -1,1 +1,5 @@
+// Create tables
 create table tasks (number integer, name text, pdf_path text, category integer, published_at text);
+
+// Add puppeteer heroku buildpack
+heroku buildpacks:add jontewks/puppeteer
