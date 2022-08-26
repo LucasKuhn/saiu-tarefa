@@ -9,7 +9,6 @@
   "scripts": {
     "start": "node index.js",
     "test": "node test.js",
-    "heroku-postbuild": "npm run build",
     "heroku-cleanup": "npx playwright install"
   },
   "dependencies": {
