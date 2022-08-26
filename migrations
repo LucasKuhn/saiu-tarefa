@@ -1,5 +1,10 @@
 // Create tables
+heroku pg:psql
 create table tasks (number integer, name text, pdf_path text, category integer, published_at text);
 
 // Add puppeteer heroku buildpack
 heroku buildpacks:add jontewks/puppeteer
+
+// Add playwright heroku buildpack
+heroku stack:set heroku-20
+heroku buildpacks:set https://github.com/mxschmitt/heroku-playwright-buildpack.git

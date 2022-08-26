@@ -8,7 +8,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "node test.js"
+    "test": "node test.js",
+    "heroku-postbuild": "npm run build",
+    "heroku-cleanup": "npx playwright install"
   },
   "dependencies": {
     "cool-ascii-faces": "^1.3.4",
