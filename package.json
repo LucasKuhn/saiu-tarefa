@@ -9,6 +9,8 @@
   "scripts": {
     "start": "node index.js",
     "test": "node test.js",
+	"heroku-prebuild": "npx playwright install",
+	"heroku-postbuild": "npx playwright install",
     "heroku-cleanup": "npx playwright install"
   },
   "dependencies": {
