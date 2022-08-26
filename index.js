@@ -119,7 +119,7 @@ const crawl = async () => {
 		client.release();
 		await sendWhatsapp(task);
 	});
-	console.log("Crawling finished!");
+	console.log("Crawling finished!"); 
 };
 
 express()
