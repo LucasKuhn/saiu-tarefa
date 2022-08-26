@@ -2,7 +2,14 @@ const cool = require('cool-ascii-faces');
 const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 5000;
-const playwright = require('playwright');
+const puppeteer = require('puppeteer-extra');
+// Add stealth plugin and use defaults (all tricks to hide puppeteer usage)
+const StealthPlugin = require('puppeteer-extra-plugin-stealth')
+puppeteer.use(StealthPlugin())
+
+// Add adblocker plugin to block all ads and trackers (saves bandwidth)
+const AdblockerPlugin = require('puppeteer-extra-plugin-adblocker')
+puppeteer.use(AdblockerPlugin({ blockTrackers: true }))
 const ORGANIZADORA_F5 = 'https://www.equipeorganizadoraf5.com.br';
 
 // Whatsapp ( https://wwebjs.dev/)
@@ -40,17 +47,13 @@ const pool = (() => {
 })();
 
 const getTasks = async () => {
-	const client = await pool.connect();
-	const browser = await playwright.chromium.launch({
-		headless: true
-	});
-	const page = await browser.newPage({ acceptDownloads: true, baseURL: "https://www.equipeorganizadoraf5.com.br" });
-	await page.goto("gincanas/2");
-
+	const browser = await puppeteer.launch({headless: true});
+	const page = await browser.newPage();
+	await page.goto("https://www.equipeorganizadoraf5.com.br/gincanas/2");
 	console.log("Opened page");
 	var title = await page.title();
 	while (!title.includes("Tarefas")) {
-		console.log("Waiting...");
+		console.log("Waiting for cloudflare...");
 		await page.waitForTimeout(2000);
 		title = await page.title();
 	}
