@@ -8,7 +8,11 @@ const ORGANIZADORA_F5 = 'https://www.equipeorganizadoraf5.com.br';
 // Whatsapp ( https://wwebjs.dev/)
 const qrcode = require('qrcode-terminal');
 const { Client } = require('whatsapp-web.js');
-const wclient = new Client();
+const wclient = new Client({
+	puppeteer: {
+		args: ['--no-sandbox'],
+	}
+});
 wclient.on('qr', qr => {
 	qrcode.generate(qr, { small: true });
 });
