@@ -1,0 +1,1 @@
+create table tasks (number integer, name text, pdf_path text, category integer, published_at text);
